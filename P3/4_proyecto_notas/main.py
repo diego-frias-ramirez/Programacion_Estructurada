@@ -1,5 +1,6 @@
 import funciones
-import conexionBD
+from usuarios import usuario
+from notas import nota
 
 def main():
     opcion=True
@@ -15,7 +16,11 @@ def main():
             email=input("\t Ingresa tu email: ").lower().strip()
             password=input("\t Ingresa tu contraseña: ").strip()
             #Agregar codigo
-              
+            regresar=usuario.registrar(nombre,apellidos,email,password)
+            if regresar:
+                print(f"{nombre} {apellidos} se registro correctemnete con el e-mail {email}")
+            else:
+                print(f"por favor intentelo de nuevo... no fue psoible realizar el registro en este mometo")
             funciones.esperarTecla()
         elif opcion=="2" or opcion=="LOGIN": 
             funciones.borrarPantalla()
@@ -23,7 +28,13 @@ def main():
             email=input("\t Ingresa tu E-mail: ").lower().strip()
             password=input("\t Ingresa tu contraseña: ").strip()
             #Agregar codigo 
-            menu_notas(19,"Dago","Fiscal")
+            #menu_notas(19,"Dago","Fiscal")
+            lista_usuario=usuario.iniciar_sesion(email,password)
+            if lista_usuario:
+                menu_notas(lista_usuario[0],lista_usuario[1],lista_usuario[2])
+            else:
+                print(f"El E-mail o la contraseña son incorrectos. intentelo de nuevo")
+            funciones.esperarTecla()
               
         elif opcion=="3" or opcion=="SALIR": 
             print("Termino la Ejecución del Sistema")
