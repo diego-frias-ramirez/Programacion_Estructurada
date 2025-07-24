@@ -1,6 +1,0 @@
-# Ignorar carpeta PF/
-PF/
-
-# Ignorar archivos compilados de Python
-__pycache__/
-*.pyc
